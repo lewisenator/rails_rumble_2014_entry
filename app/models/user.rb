@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
 
     identity = Identity.find_for_oauth(auth)
     identity.auth = auth.to_s
+    identity.save!
 
     user = signed_in_resource ? signed_in_resource : identity.user
 
