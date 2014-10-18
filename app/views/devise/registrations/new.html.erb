@@ -3,41 +3,39 @@
   <div class="pull-left col"> 
     <h4><i class="fa fa-unlock"></i></i>Already registered ?</h4>
     <p></p>
-    <a href="#" class="btn btn-default">Sign in</a>
+    <%= link_to "Sign in", new_user_session_path, class: "btn btn-default" %>
   </div>
   
-<div class="pull-right col">
-  <center><%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Create account with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "btn btn-primary", style: "background-color: #000; " %><br />
-  <% end -%>
-  <% end -%>
-  </center>
-  <br /><hr style="margin-top:20px; margin-bottom: 20px;"/>
+  <div class="pull-right col">
+    <center><%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "Create account with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "btn btn-primary", style: "background-color: #000; " %><br />
+      <% end -%>
+    <% end -%></center>
+    <br /><hr style="margin-top:20px; margin-bottom: 20px;"/>
 
-  <h4><i class="fa fa-user"></i></i>Create Account</h4>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+    <h4><i class="fa fa-plus-circle"></i></i>Create Account</h4>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
-    <div>
-    <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Enter full name" %></div>
+      <div>
+        <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Enter full name" %></div>
 
-    <div>
-    <%= f.email_field :email, class: "form-control", placeholder: "Enter email" %></div>
+      <div>
+        <%= f.email_field :email, class: "form-control", placeholder: "Enter email" %></div>
 
-    <div>
-    <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %></div>
+      <div>
+        <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %></div>
 
-    <div>
-    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm password" %></div>
+      <div>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm password" %></div>
 
-    <div><%= f.submit "Create Account", class: "btn btn-primary" %></div><br />
-    <div><%= link_to 'Cancel', home_index_path, class: "btn btn-default" %></div><br />
+      <div><%= f.submit "Create Account", class: "btn btn-primary" %></div><br />
+      <div><%= link_to 'Cancel', root_path, class: "btn btn-default" %></div><br />
 
 
-  <% end %>
+    <% end %>
 
   
-</div>
-
+  </div>
 </div>
