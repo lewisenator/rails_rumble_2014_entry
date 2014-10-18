@@ -22,6 +22,8 @@
 
 		<h4><i class="fa fa-user"></i></i>Login</h4>
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+			<%= devise_error_messages! %>
+			
 	  		<div><%= f.label :email %><br />
 	  			<%= f.email_field :email, :autofocus => true, class: "form-control", placeholder: "Enter email" %>
 	  		</div>
