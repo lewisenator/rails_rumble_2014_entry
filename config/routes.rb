@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'dashboard/index'
 
+  match '/features', to: 'home#features', via: 'get'
+
 
   authenticated :user do
     root to: 'dashboard#index'

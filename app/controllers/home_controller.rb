@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
-  layout 'home_page'
+  
   def index
+  	render layout: 'home_page'
+  end
+
+  def features
   end
 end
