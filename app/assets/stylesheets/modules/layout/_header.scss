@@ -71,9 +71,9 @@
 /* BASIC NAVIGATION
 -------------------------------------------------- */
 
-%nav-border-box {
-  @include vendorize(box-sizing, "border-box");
-}
+//%nav-border-box {
+//  @include vendorize(box-sizing, "border-box");
+//}
 
 %nav-no-radius {
   @include vendorize(border-radius, 0);
