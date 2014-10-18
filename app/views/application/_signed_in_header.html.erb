@@ -3,21 +3,17 @@
 	<div id="top-bar" class="open">
 		<div class="container">
 			<ul class="links pull-left hidden-xs">
-				<% if current_user %>
-					<li>
-						<%= link_to root_path do%>
-							<i class="fa fa-user"></i>
-							<%= current_user.name %>
-						<% end %>
-					</li>
-				<% end %>
-				<ul class="links pull-right no-float-xs">
-					<%#
-						<li><a href="#"><i class="fa fa-rss"></i>feed</a></li>
-						<li><a href="#"><i class="fa fa-bars"></i>statements</a></li>
-						<li><a href="#"><i class="fa fa-download"></i>downloads</a></li>
-					%>
-				</ul>
+				<li>
+					<%= link_to root_path do%>
+						<i class="fa fa-user"></i>
+						<%= current_user.name %>
+					<% end %>
+				</li>
+			</ul>
+			<ul class="links pull-right no-float-xs">
+				<li><%= link_to edit_user_registration_path do %>
+					<i class="fa fa-gear"></i>Account Settings
+				<% end%></li>
 			</ul>
 		</div>
 	</div>
@@ -44,15 +40,12 @@
 							<i class="icon fa fa-home"></i>home
 						<% end %>
 					</li>
-
-
-					<% if current_user %>
-						<li>
-							<%= link_to destroy_user_session_path, method: :delete do %>
-								<i class="icon fa fa-home"></i>Logout
-							<% end %>
-						</li>
-					<% end %>
+					<li>
+						<%= link_to destroy_user_session_path, method: :delete do %>
+							<i class="icon fa fa-home"></i>Logout
+						<% end %>
+					</li>
+					
 
 					<%#
 					<li class="dropdown">

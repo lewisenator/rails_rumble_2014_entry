@@ -1,0 +1,84 @@
+<header id="header" style="border-bottom: none;">
+
+	<div id="top-bar" class="open">
+		<div class="container">
+			<ul class="links pull-left hidden-xs">
+				<li>
+				</li>
+				<ul class="links pull-right no-float-xs">
+					<%#
+						<li><a href="#"><i class="fa fa-rss"></i>feed</a></li>
+						<li><a href="#"><i class="fa fa-bars"></i>statements</a></li>
+						<li><a href="#"><i class="fa fa-download"></i>downloads</a></li>
+					%>
+				</ul>
+			</ul>
+		</div>
+	</div>
+
+	<div id="main-nav" class="navbar navbar-default hide-icons" style="border-radius: 0;">
+
+		<div class="container">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="fa fa-bars fa-lg"></span>
+				</button>
+				<%= link_to root_path, class: "navbar-brand" do %>
+					<%= image_tag "clapperboard.png", style: "display: inline;" %>
+					Track<span class="color-1">Your</span>Sh<span class="color-1">.it</span>
+				<% end %>
+			</div>
+
+			<div class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class=<%= "active" if current_page?(root_path)%>>
+						<%= link_to root_path do %>
+							<i class="icon fa fa-home"></i>home
+						<% end %>
+					</li>
+					<li class=<%= "active" if current_page?(features_path)%>>
+						<%= link_to "Features", features_path %>
+					</li>
+
+
+					<%#
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-file-text"></i>pages<i class="fa fa-angle-down parent-symbol"></i></a>
+						<ul class="dropdown-menu">
+							<li><a href="about.html">About Us</a></li>
+							<li><a href="services.html">Services</a></li>
+							<li><a href="sidenav.html">side bar</a></li>
+							<li><a href="faq.html">FAQ</a></li>
+							<li><a href="404.html">404</a></li>
+							<li><a href="features.html">features</a></li>
+							<li><a href="icons.html">icons</a></li>
+							<li><a href="login.html">Login</a></li>
+							<li><a href="register.html">Register</a></li>
+						</ul>
+					</li>
+					<li><a href="portfolio.html"><i class="icon fa fa-camera"></i>portfolio</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-comments"></i>blog<i class="fa fa-angle-down parent-symbol"></i></a>
+						<ul class="dropdown-menu">
+							<li><a href="blog.html">Blog Posts</a></li>
+							<li><a href="post.html">Single Post</a></li>
+						</ul>
+					</li>
+					%>
+
+
+				</ul>
+
+
+			</div>
+
+
+		</div>
+
+
+	</div>
+
+
+</header>

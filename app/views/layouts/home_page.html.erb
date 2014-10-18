@@ -9,7 +9,11 @@
 	</head>
 	<body class="overlay">
 		<div id="page-wrapper">
-			<%= render 'header' %>
+			<% if current_user %>
+				<%= render 'signed_in_header' %>
+			<% else %>
+				<%= render 'signed_out_header' %>
+			<% end %>
 
 			<%= yield %>
 
