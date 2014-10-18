@@ -9,7 +9,10 @@
   <div class="pull-right col">
     <center><%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= link_to "Create account with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "btn btn-primary", style: "background-color: #000; " %><br />
+        <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-primary", style: "background-color: #000;" do %>
+          <i class="fa fa-github-square"></i>
+          <%= "Create account with #{provider.to_s.titleize}" %>
+        <% end %>
       <% end -%>
     <% end -%></center>
     <br /><hr style="margin-top:20px; margin-bottom: 20px;"/>
