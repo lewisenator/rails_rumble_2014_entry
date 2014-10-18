@@ -20,8 +20,8 @@
 #
 
 class User < ActiveRecord::Base
-  TEMP_EMAIL_PREFIX = 'test@example'
-  TEMP_EMAIL_REGEX = /\Atest@example/
+  # TEMP_EMAIL_PREFIX = 'test@example'
+  # TEMP_EMAIL_REGEX = /\Atest@example/
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
   #validates_presence_of :first_name, :last_name
 
-  validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
+  # validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
 
  #  def self.from_omniauth(auth)
 	#   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -61,15 +61,15 @@ class User < ActiveRecord::Base
     user = signed_in_resource ? signed_in_resource : identity.user
 
     if user.nil?
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
+      #email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      email = auth.info.email# if email_is_verified
       user = User.where(:email => email).first if email
 
       if user.nil?
         user = User.new(
-          name: auth.info.name,
-          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-          password: Devise.friendly_token[0,20]
+          name: auth.info.name || auth.info.nickname,
+          email: email, # ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          password: Devise.friendly_token[0, 20]
         )
         user.skip_confirmation!
         user.save!
@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
-  end
+  # def email_verified?
+  #   self.email && self.email !~ TEMP_EMAIL_REGEX
+  # end
 end
