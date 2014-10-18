@@ -76,7 +76,6 @@ class User < ActiveRecord::Base
           uid: auth.uid,
           provider: auth.provider
         )
-        user.skip_confirmation!
         user.save!
       end
     end
