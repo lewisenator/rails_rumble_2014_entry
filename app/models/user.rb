@@ -29,18 +29,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  validates_presence_of :first_name, :last_name
+  #validates_presence_of :first_name, :last_name
 
   validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
 
-  def self.from_omniauth(auth)
-	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-	    user.email = auth.info.email
-	    user.password = Devise.friendly_token[0,20]
-	    user.name = auth.info.name   # assuming the user model has a name
-	    user.image = auth.info.image # assuming the user model has an image
-	  end
-	end
+ #  def self.from_omniauth(auth)
+	#   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+	#     user.email = auth.info.email
+	#     user.password = Devise.friendly_token[0,20]
+	#     user.name = auth.info.name   # assuming the user model has a name
+	#     user.image = auth.info.image # assuming the user model has an image
+	#   end
+	# end
 
 	# def self.new_with_session(params, session)
  #    super.tap do |user|
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
       if user.nil?
         user = User.new(
-          name: auth.extra.raw_info.name,
+          #name: auth.extra.raw_info.name,
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
