@@ -9,86 +9,9 @@
 </head>
 <body>
 <div id="page-wrapper">
-	<header id="header">
-
-		<div id="top-bar" class="open">
-			<div class="container">
-				<ul class="links pull-left hidden-xs">
-					<ul class="links pull-right no-float-xs">
-						<li><a href="#"><i class="fa fa-rss"></i>feed</a></li>
-						<li><a href="#"><i class="fa fa-bars"></i>statements</a></li>
-						<li><a href="#"><i class="fa fa-download"></i>downloads</a></li>
-					</ul>
-				</ul>
-			</div>
-		</div>
-
-		<div id="main-nav" class="navbar navbar-default hide-icons">
-
-			<div class="container">
-
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="fa fa-bars fa-lg"></span>
-					</button>
-					<a href="index.html" class="navbar-brand">
-						<i class="fa fa-graduation-cap alt-color"></i>Delu<span class="color-1">xer</span>
-					</a>
-				</div>
-
-				<div class="navbar-collapse collapse">
-
-					<ul class="nav navbar-nav nav-buttons navbar-right">
-						<li>
-							<a class="nav-btn bg-1" href="contact.html"><i class="fa fa-envelope"></i><span class="xs-only">contact</span></a>
-						</li>
-						<li>
-							<a class="nav-btn top-bar-toggle open" href="#top-bar" data-custom-toggle="slide" data-class="open" data-target="#top-bar"><span class="symbol"></span></a>
-						</li>
-					</ul>
-
-					<ul class="nav navbar-nav nav-buttons navbar-right">
-						<li><a class="nav-btn bg-1" href="shop-index.html"><i class="fa fa-th-large"></i><span>our store</span></a>
-						</li>
-					</ul>
-
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="index.html"><i class="icon fa fa-home"></i>home</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-file-text"></i>pages<i class="fa fa-angle-down parent-symbol"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="about.html">About Us</a></li>
-								<li><a href="services.html">Services</a></li>
-								<li><a href="sidenav.html">side bar</a></li>
-								<li><a href="faq.html">FAQ</a></li>
-								<li><a href="404.html">404</a></li>
-								<li><a href="features.html">features</a></li>
-								<li><a href="icons.html">icons</a></li>
-								<li><a href="login.html">Login</a></li>
-								<li><a href="register.html">Register</a></li>
-							</ul>
-						</li>
-						<li><a href="portfolio.html"><i class="icon fa fa-camera"></i>portfolio</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-comments"></i>blog<i class="fa fa-angle-down parent-symbol"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="blog.html">Blog Posts</a></li>
-								<li><a href="post.html">Single Post</a></li>
-							</ul>
-						</li>
-					</ul>
+	<%= render 'header' %>
 
 
-				</div>
-
-
-			</div>
-
-
-		</div>
-
-
-	</header>
 
 	<section class="content-block default-bg">
 
@@ -107,20 +30,7 @@
 
 
 
-	<footer id="footer">
-		<div class="bottom">
-			<div class="container">
-				<ul class="social-buttons colored-bg-on-hover round clearfix">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-skype"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-rss"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-				</ul>
-				<span class="copy-text">Copyright &copy; 2014 Deluxer. All rights reserved.</span>
-			</div>
-		</div>
-	</footer>
+	<%= render 'footer' %>
 
 </div>
 </body>
