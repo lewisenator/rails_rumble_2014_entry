@@ -47,8 +47,10 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
   <<: *default
-  database: track_your_shit_production
-  username: track_your_shit
-  password: <%= ENV['TRACK_YOUR_SHIT_DATABASE_PASSWORD'] %>
+  host: us-cdbr-iron-east-01.cleardb.net
+  database: heroku_e450534bf3adcb1
+  username: bcac981c909743
+  password: c9acaf45
