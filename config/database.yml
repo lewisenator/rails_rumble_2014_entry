@@ -49,8 +49,9 @@ test:
 #
 
 production:
-  <<: *default
-  host: us-cdbr-iron-east-01.cleardb.net
-  database: heroku_e450534bf3adcb1
-  username: bcac981c909743
-  password: c9acaf45
+  url: mysql2://bcac981c909743:c9acaf45@us-cdbr-iron-east-01.cleardb.net/heroku_e450534bf3adcb1?reconnect=true
+  #<<: *default
+  #host: us-cdbr-iron-east-01.cleardb.net
+  #database: heroku_e450534bf3adcb1
+  #username: bcac981c909743
+  #password: c9acaf45
