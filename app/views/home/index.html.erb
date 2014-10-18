@@ -27,11 +27,12 @@
 				<p class="meta">Lorem ipsum dolor sit amet, consectetur elit.</p>
 				<div>
 
-					<%= link_to 'Log In', new_user_session_path, class: "scroll-to btn btn-primary" %>
-					<%= link_to 'Sign Up', new_user_registration_path, class: "scroll-to btn btn-primary" %>
-
-					<a href="#about" class="scroll-to btn btn-primary"><i class="fa fa-bars"></i>learn more</a>
-					<a href="#about" class="scroll-to btn btn-primary"><i class="fa fa-print"></i>start now</a>
+					<%= link_to new_user_session_path, class: "scroll-to btn btn-primary" do %>
+						<i class="fa fa-user"></i>Log In
+					<% end %>
+					<%= link_to new_user_registration_path, class: "scroll-to btn btn-primary" do %>
+						<i class="fa fa-plus-circle"></i>Sign Up
+					<% end %>
 				</div>
 			</div>
 		</div>

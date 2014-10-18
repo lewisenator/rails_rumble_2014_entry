@@ -91,7 +91,8 @@ $footer-pad: 60px; // footer padding.
   @include vendorize(background-size, "cover!important");
 }
 
-$page-bg: $asset-path + "images/backgrounds/pagebg.jpg"; // page background image.
+$page-bg: '<%= asset_path "backgrounds/pagebg.jpg" %>'; // page background image.
+//$page-bg: $asset-path + "images/backgrounds/pagebg.jpg"; // page background image.
 .page-bg {background:url($page-bg) no-repeat center 0 fixed; @extend %bg-cover; }
 
 

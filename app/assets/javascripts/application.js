@@ -15,4 +15,12 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
+//= require jquery.bxslider-rahisified
+//= require jquery.prettyPhoto
+//= require jflickrfeed.custom
+//= require tweetable.jquery
+//= require jquery.timeago
+//= require template
+
+
 //= require_tree .

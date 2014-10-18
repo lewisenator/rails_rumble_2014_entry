@@ -14,7 +14,7 @@
 		</div>
 	</div>
 
-	<div id="main-nav" class="navbar navbar-default hide-icons">
+	<div id="main-nav" class="navbar navbar-default hide-icons" style="border-radius: 0;">
 
 		<div class="container">
 
@@ -30,7 +30,11 @@
 			<div class="navbar-collapse collapse">
 
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="index.html"><i class="icon fa fa-home"></i>home</a></li>
+					<li class="active">
+						<%= link_to home_index_path do %>
+							<i class="icon fa fa-home"></i>home
+						<% end %>
+					</li>
 
 
 					<%#

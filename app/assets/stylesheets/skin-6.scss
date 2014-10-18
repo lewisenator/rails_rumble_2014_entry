@@ -11,7 +11,7 @@
 =============================================================*/
 
 @import "libs/custom";
-@import "variables";
+@import "_variables.scss.erb";
 @import "skins/skin-6";
 @import "recipes";
 @import "bs-theme";
