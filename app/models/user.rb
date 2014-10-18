@@ -42,34 +42,42 @@ class User < ActiveRecord::Base
 	  end
 	end
 
-  # def self.find_for_oauth(auth, signed_in_resource = nil)
+	# def self.new_with_session(params, session)
+ #    super.tap do |user|
+ #      if data = session["devise.github_data"] && session["devise.github_data"]["extra"]["raw_info"]
+ #        user.email = data["email"] if user.email.blank?
+ #      end
+ #    end
+ #  end
 
-  #   identity = Identity.find_for_oauth(auth)
+  def self.find_for_oauth(auth, signed_in_resource = nil)
 
-  #   user = signed_in_resource ? signed_in_resource : identity.user
+    identity = Identity.find_for_oauth(auth)
 
-  #   if user.nil?
-  #     email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-  #     email = auth.info.email if email_is_verified
-  #     user = User.where(:email => email).first if email
+    user = signed_in_resource ? signed_in_resource : identity.user
 
-  #     if user.nil?
-  #       user = User.new(
-  #         name: auth.extra.raw_info.name,
-  #         email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-  #         password: Devise.friendly_token[0,20]
-  #       )
-  #       user.skip_confirmation!
-  #       user.save!
-  #     end
-  #   end
+    if user.nil?
+      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      email = auth.info.email if email_is_verified
+      user = User.where(:email => email).first if email
 
-  #   if identity.user != user
-  #     identity.user = user
-  #     identity.save!
-  #   end
-  #   user
-  # end
+      if user.nil?
+        user = User.new(
+          name: auth.extra.raw_info.name,
+          email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+          password: Devise.friendly_token[0,20]
+        )
+        user.skip_confirmation!
+        user.save!
+      end
+    end
+
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+    user
+  end
 
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX

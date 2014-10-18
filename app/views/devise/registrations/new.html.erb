@@ -1,8 +1,5 @@
 <h2>Sign up</h2>
 
-<%= link_to 'Sign in with github', user_omniauth_authorize_path(:github) %><br />
----------------- OR --------------<br />
-<br />
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
