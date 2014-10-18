@@ -52,7 +52,10 @@ class User < ActiveRecord::Base
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     Rails.logger.error "auth result: #{auth.to_s}"
+    puts "auth result: #{auth.to_s}"
+
     identity = Identity.find_for_oauth(auth)
+    identity.auth = auth.to_s
 
     user = signed_in_resource ? signed_in_resource : identity.user
 
