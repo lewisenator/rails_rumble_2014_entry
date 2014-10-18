@@ -10,17 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery-1.8.3.min
 //= require jquery_ujs
-//= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
-//= require jquery.bxslider-rahisified
 //= require jquery.prettyPhoto
 //= require jflickrfeed.custom
 //= require tweetable.jquery
 //= require jquery.timeago
 //= require template
 
-
 //= require_tree .
+//= require jquery.bxslider-rahisified

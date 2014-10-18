@@ -5,26 +5,26 @@
 				<ul class="bxslider" id="text-slider" data-call="bxslider" data-options="parentSelector:'.text-slider', removeParentClass:'no-js', prevText:'', nextText:'', pager:true, controls:false, mode:'horizontal', auto:true, autoReload:true">
 					<li>
 						<div class="slide">
-							<h2>a great theme for your next project!</h2>
+							<h2>Track your shit.</h2>
 						</div>
 					</li>
 					<li>
 						<div class="slide">
-							<h2>made for both business and ecommerce.</h2>
+							<h2>View your friends' shit.</h2>
 						</div>
 					</li>
 					<li>
 						<div class="slide">
-							<h2>built using latest bootstrap release.</h2>
+							<h2>Lend shit to friends.</h2>
 						</div>
 					</li>
 					<li>
 						<div class="slide">
-							<h2>most recent font awesome glyphs.</h2>
+							<h2>Rate your shit.</h2>
 						</div>
 					</li>
 				</ul>
-				<p class="meta">Lorem ipsum dolor sit amet, consectetur elit.</p>
+				<p class="meta">Keep tabs on all of your movies, books, video games, etc...</p>
 				<div>
 
 					<%= link_to new_user_session_path, class: "scroll-to btn btn-primary" do %>
@@ -38,3 +38,9 @@
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript">
+	$(document).ready( function() {
+		$('#text-slider').bxSlider();
+	});
+</script>
