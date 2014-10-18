@@ -3,6 +3,14 @@
 	<div id="top-bar" class="open">
 		<div class="container">
 			<ul class="links pull-left hidden-xs">
+				<% if current_user %>
+					<li>
+						<%= link_to root_path do%>
+							<i class="fa fa-user"></i>
+							<%= current_user.name %>
+						<% end %>
+					</li>
+				<% end %>
 				<ul class="links pull-right no-float-xs">
 					<%#
 						<li><a href="#"><i class="fa fa-rss"></i>feed</a></li>
