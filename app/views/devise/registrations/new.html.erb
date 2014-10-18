@@ -1,0 +1,28 @@
+<h2>Sign up</h2>
+
+<%= link_to 'Sign in with github', user_omniauth_authorize_path(:github) %><br />
+---------------- OR --------------<br />
+<br />
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :first_name %><br />
+  <%= f.text_field :first_name %></div>
+
+  <div><%= f.label :last_name %><br />
+  <%= f.text_field :last_name %></div>
+
+  <div><%= f.submit "Sign up" %></div><br />
+  <div><%= link_to 'Cancel', home_index_path %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
