@@ -1,3 +1,21 @@
-<h1>Dashboard</h1>
-<p>Blah blah blah</p>
-<%= link_to 'log out', destroy_user_session_path, method: :delete %>
+<h1>My Stuff</h1>
+
+<ul class="product-grid row">
+	<% @sections.each do |section| %>
+		<li class="col-xs-6 col-sm-4 col-md-4">
+			<div class="product clearfix">
+				<div class="image">
+					<%= link_to section.url, class: 'main' do %>
+						<%= image_tag section.image_name, size: '200x200' %>
+					<% end %>
+				</div>
+				<div class="title">
+					<a class="name" href="#"><%= section.name %></a>
+				</div>
+				<div class="links">
+					<%= link_to 'View', section.url, class: 'view_section_link' %>
+				</div>
+			</div>
+		</li>
+	<% end %>
+</ul>

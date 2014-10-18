@@ -6,3 +6,30 @@
 @import "libs/custom";
 @import "skins/skin-1";
 @import "bxslider";
+
+.product-grid {
+  li {
+    .product {
+      .image {
+        a {
+          img {
+            background-color: #CCC;
+            padding: 10px;
+            width: 100%;
+            height: 100%;
+          }
+          img:hover {
+            background-color: #BBB;
+          }
+        }
+      }
+      .links {
+        .view_section_link {
+          color: red;
+          float: none;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
