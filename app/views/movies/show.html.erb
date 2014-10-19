@@ -22,7 +22,24 @@
 	};
 </script>
 
-<h1 style="float:left;"><%= @movie.title %></h1>
 
-<%= link_to 'Remove Movie From My Library', 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join) %>
-<%= link_to 'Add Movie To My Library', 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join) %>
+<div class="row">
+
+	<div class="col-lg-6">
+		<h1 style="float:left;"><%= @movie.title %></h1>
+	</div>
+	<div class="col-lg-6">
+		<%= link_to 'Remove Movie From My Library', 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join), class: 'btn btn-primary right movie_button' %>
+		<%= link_to 'Add Movie To My Library', 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join), class: 'btn btn-primary right movie_button' %>
+	</div>
+</div>
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<%= link_to 'Back to My Movies', movies_path, class: 'btn btn-primary' %>
