@@ -19,6 +19,6 @@
 //= require tweetable.jquery
 //= require jquery.timeago
 //= require template
-
+//= require jquery.ui.all
 //= require_tree .
 //= require jquery.bxslider-rahisified

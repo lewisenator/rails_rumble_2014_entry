@@ -17,7 +17,11 @@ Rails.application.routes.draw do
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
 
-  resources :movies
+  resources :movies do
+    collection do
+      get :search
+    end
+  end
 
   
   # The priority is based upon order of creation: first created -> highest priority.

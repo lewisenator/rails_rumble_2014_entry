@@ -1,1 +1,47 @@
-<h1>Movies</h1>
+<script type="text/javascript">
+	var showAddPopup = function() {
+		$("#add_popup").dialog();
+	};
+
+	var performSearch = function() {
+		var keywords = $('#keywords').val();
+		$.ajax({
+			type: "GET",
+			url: "<%= search_movies_path %>",
+			data: { keywords: keywords }
+		}).done(function(msg) {
+			$('#search_results').html('');
+			$(msg.results).each(function(index, item) {
+				var listItem = '';
+				listItem += '<li>';
+				listItem += '<img src=\'' + item.poster + '\'>';
+				listItem += item.title;
+				listItem += ' (' + item.year + ')';
+				listItem += '</li>';
+				$('#search_results').html($('#search_results').html() + listItem);
+				console.log('title: ' + item.title + ' year: ' + item.year + ' poster: ' + item.poster);
+			});
+		});
+	};
+
+</script>
+
+
+
+<h1>Movies<%= link_to "Add", 'javascript:showAddPopup();', class: "btn btn-primary right" %></h1>
+
+<div id="add_popup" title="Add a Movie">
+	<form>
+		<input id="keywords" type="text" placeholder="Keyword(s)" />
+		<%= link_to "Search", 'javascript:performSearch();', class: "btn btn-primary" %>
+	</form>
+	<ul id="search_results" style="list-style:none;">
+
+	</ul>
+</div>
+
+<div id="my_movies_list">
+
+
+</div>
+
