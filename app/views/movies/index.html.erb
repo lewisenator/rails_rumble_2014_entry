@@ -117,16 +117,16 @@
 				<div class="product clearfix" style="height: 100%;">
 					<div class="image">
 						<center>
-							<%= link_to movie_path(movie.imdb_id), class: 'main' do %>
-								<%= image_tag movie.poster_image.url(:medium)%>
+							<%= link_to movie_path(movie.movie.imdb_id), class: 'main' do %>
+								<%= image_tag movie.movie.poster_image.url(:medium)%>
 							<% end %>
 						</center>
 					</div>
 					<div class="title">
-						<%= link_to movie.title, movie_path(movie.imdb_id) %>
+						<%= link_to movie.movie.title, movie_path(movie.movie.imdb_id) %>
 					</div>
 					<div class="links">
-						<%= link_to 'View', movie_path(movie.imdb_id), class: 'view_section_link' %>
+						<%= link_to 'View', movie_path(movie.movie.imdb_id), class: 'view_section_link' %>
 					</div>
 				</div>
 			</li>

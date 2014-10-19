@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019083333) do
+ActiveRecord::Schema.define(version: 20141019222703) do
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20141019083333) do
     t.integer  "movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "your_rating"
+    t.boolean  "in_library"
   end
 
   add_index "user_movie_joins", ["movie_id"], name: "index_user_movie_joins_on_movie_id", using: :btree

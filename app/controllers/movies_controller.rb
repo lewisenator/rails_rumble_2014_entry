@@ -9,7 +9,10 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @movies = current_user.movies.order(:title).paginate(page: params[:page] || 1, per_page: PER_PAGE)
+    @movies = UserMovieJoin.joins(:movie).
+        where(user_id: current_user.id, in_library: true).
+        order('movies.title asc').
+        paginate(page: params[:page] || 1, per_page: PER_PAGE)
   end
 
   def search
@@ -69,15 +72,31 @@ class MoviesController < ApplicationController
     movie_id = params[:movie_id]
     existing = UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).first
     unless existing
-      UserMovieJoin.create!(user_id: current_user.id, movie_id: movie_id)
+      existing = UserMovieJoin.create!(user_id: current_user.id, movie_id: movie_id, in_library: true)
     end
+    existing.in_library = true
+    existing.save!
     render json: {success: true}
   end
 
   def disassociate_user
     movie_id = params[:movie_id]
-    UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).each{|x| x.destroy}
+    UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).all.each do |join|
+      join.in_library = false
+      join.save!
+    end
     render json: {success: true}
+  end
+
+  def rate_user
+    movie_id = params[:movie_id]
+    your_rating = params[:your_rating]
+    join = UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).first
+    unless join
+      join =  UserMovieJoin.create!(user_id: current_user.id, movie_id: movie_id, in_library: false)
+    end
+    join.your_rating = your_rating
+    join.save!
   end
 
   private

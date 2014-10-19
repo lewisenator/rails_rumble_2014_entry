@@ -1,5 +1,7 @@
 <script type="text/javascript">
 	var movieId = '<%= @movie.id %>';
+	var yourRating = <%= @user_movie_join.try(:your_rating) || 0 %>;
+
 	var addMovie = function() {
 		$.ajax({
 			type: "POST",
@@ -20,16 +22,70 @@
 			$('#remove_movie_button').hide();
 		});
 	};
+
+	var selectStar = function(index) {
+		yourRating = index;
+		$.ajax({
+			type: "POST",
+			url: "<%= rate_user_movies_path %>",
+			data: { movie_id: movieId, your_rating: yourRating }
+		}).done(function(msg) {
+		});
+
+		for (var i = 1; i <= 5; i++) {
+			var starITag = $($('#star_' + i).children()[0]);
+			if (i <= yourRating) {
+				starITag.removeClass('fa-star-o');
+				starITag.addClass('fa-star');
+				starITag.addClass('selected_star');
+			} else {
+				starITag.addClass('fa-star-o');
+				starITag.removeClass('fa-star');
+				starITag.removeClass('selected_star');
+			}
+		}
+	};
+
+	var hoverStar = function(index) {
+		for (var i = 1; i <= 5; i++) {
+			var starITag = $($('#star_' + i).children()[0]);
+			starITag.removeClass('selected_star');
+			if (i <= index) {
+				starITag.removeClass('fa-star-o');
+				starITag.addClass('fa-star');
+			} else {
+				starITag.addClass('fa-star-o');
+				starITag.removeClass('fa-star');
+			}
+		}
+	};
+
+	$(function() {
+		$('.star').hover(function() {
+			var starId = $(this).attr('id');
+			var index = parseInt(starId.replace('star_', ''));
+			hoverStar(index);
+		}, function() {
+			hoverStar(0);
+			selectStar(yourRating);
+		});
+		$('.star').click(function() {
+			var starId = $(this).attr('id');
+			var index = parseInt(starId.replace('star_', ''));
+			selectStar(index);
+		});
+		selectStar(yourRating);
+	});
 </script>
 
 <div class="row" style="margin-top: 15px;">
 	<div class="col-lg-4" style="margin-top: 20px;">
 		<img src=<%= @movie.poster_image.url(:large) %>, style="width: 100%; height: auto;"/>
 		<center>
-			<%= link_to 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join), class: 'btn btn-primary movie_button' do %>
+			<%= link_to 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' if @user_movie_join.nil? || !@user_movie_join.in_library), class: 'btn btn-primary movie_button' do %>
 				<i class="fa fa-times"></i> Remove Movie From My Library
 			<% end %>
-			<%= link_to 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join), class: 'btn btn-primary-green movie_button' do %>
+			<%= link_to 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join && @user_movie_join.in_library), class: 'btn btn-primary-green movie_button' do %>
 				<i class="fa fa-plus"></i> Add Movie To My Library
 			<% end %>
 		</center>
@@ -78,7 +134,15 @@
 								<h4 class="movie_field">
 									<b class="movie_info_label"><%= (column[:display] || '').html_safe %></b>:
 									<span class="movie_info_data">
-										<%= (column[:value] || '').html_safe %>
+										<% if column[:display] == 'Your Rating' %>
+											<% (1..5).to_a.each do |index| %>
+												<a id="star_<%= index %>" class="star">
+													<i class="fa fa-star-o" style="font-size: 150%;"></i>
+												</a>
+											<% end %>
+										<% else %>
+											<%= (column[:value] || '').html_safe %>
+										<% end %>
 									</span>
 								</h4>
 							</div>
