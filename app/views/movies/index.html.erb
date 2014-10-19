@@ -56,8 +56,32 @@
 
 
 <div id="my_movies_list">
-	<% @movies.each do |movie| %>
-		<li><%= link_to movie.title, movie_path(movie.imdb_id) %></li>
-	<% end %>
+
+	<ul class="product-grid row">
+		<% @movies.each do |movie| %>
+			<li class="col-xs-6 col-sm-3 col-md-3">
+				<div class="product clearfix">
+					<div class="image">
+						<%= link_to movie_path(movie.imdb_id), class: 'main' do %>
+							<%= image_tag movie.poster, width: '300', height: '445' %>
+						<% end %>
+					</div>
+					<div class="title">
+						<%= link_to movie.title, movie_path(movie.imdb_id) %>
+					</div>
+					<div class="links">
+						<%= link_to 'View', movie_path(movie.imdb_id), class: 'view_section_link' %>
+					</div>
+				</div>
+			</li>
+		<% end %>
+	</ul>
+	<div class="row">
+		<div class="col-xs-6 col-sm-3 col-md-3">
+			<div class="digg_pagination">
+				<%= will_paginate @movies, container: false %>
+			</div>
+		</div>
+	</div>
 </div>
 

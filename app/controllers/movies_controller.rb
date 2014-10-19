@@ -2,12 +2,12 @@ require 'omdb/network'
 require 'omdb/movie'
 
 class MoviesController < ApplicationController
-  PER_PAGE = 16
+  PER_PAGE = 12
 
   before_action :authenticate_user!
 
   def index
-    @movies = current_user.movies.paginate(page: params[:page] || 1, per_page: PER_PAGE)
+    @movies = current_user.movies.order(:title).paginate(page: params[:page] || 1, per_page: PER_PAGE)
   end
 
   def search

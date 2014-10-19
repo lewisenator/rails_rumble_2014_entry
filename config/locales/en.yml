@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  will_paginate:
+    previous_label: "&lt;"
+    next_label: "&gt;"
+    page_gap: "&hellip;"

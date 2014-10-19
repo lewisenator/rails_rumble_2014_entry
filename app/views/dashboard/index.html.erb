@@ -5,9 +5,11 @@
 		<li class="col-xs-6 col-sm-4 col-md-4">
 			<div class="product clearfix">
 				<div class="image">
-					<%= link_to section.url, class: 'main' do %>
-						<%= image_tag section.image_name, size: '200x200' %>
-					<% end %>
+					<center>
+						<%= link_to section.url, class: 'main' do %>
+							<%= image_tag section.image_name, size: '200x200' %>
+						<% end %>
+					</center>
 				</div>
 				<div class="title">
 					<a class="name" href="#"><%= section.name %></a>
@@ -19,3 +21,4 @@
 		</li>
 	<% end %>
 </ul>
+
