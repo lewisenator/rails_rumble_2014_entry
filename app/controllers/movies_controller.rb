@@ -41,7 +41,27 @@ class MoviesController < ApplicationController
       details = fetch_details(imdb_id)[:movie]
       @movie = Movie.new(
           title: details.title,
-          imdb_id: details.imdb_id
+          imdb_id: details.imdb_id,
+          year: details.year,
+          movie_type: details.type,
+          rated: details.rated,
+          released: details.released,
+          runtime: details.runtime,
+          genre: details.genre,
+          director: details.director,
+          writer: details.writer,
+          actors: details.actors,
+          plot: details.plot,
+          poster: details.poster,
+          imdb_rating: details.imdb_rating,
+          imdb_votes: details.imdb_votes,
+          metascore: details.metascore,
+          language: details.language,
+          country: details.country,
+          awards: details.awards,
+          tomato_rating: details.tomato_rating,
+          production: details.production,
+          website: details.website
       )
       @movie.save!
     end

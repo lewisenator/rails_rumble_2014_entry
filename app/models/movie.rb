@@ -6,7 +6,6 @@
 #  title         :string(255)
 #  year          :integer
 #  imdb_id       :string(255)
-#  type          :string(255)
 #  rated         :string(255)
 #  released      :date
 #  runtime       :string(255)
@@ -27,6 +26,7 @@
 #  website       :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  movie_type    :string(255)
 #
 
 class Movie < ActiveRecord::Base
