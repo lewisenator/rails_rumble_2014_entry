@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20141019045916) do
     t.string   "title"
     t.integer  "year"
     t.string   "imdb_id"
-    t.string   "type"
     t.string   "rated"
     t.date     "released"
     t.string   "runtime"
@@ -50,6 +49,7 @@ ActiveRecord::Schema.define(version: 20141019045916) do
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "movie_type"
   end
 
   create_table "user_movie_joins", force: true do |t|
