@@ -25,17 +25,55 @@
 
 <div class="row">
 
-	<div class="col-lg-6">
-		<h1 style="float:left;"><%= @movie.title %></h1>
+	<div class="col-lg-4">
+		<h1 style="text-align: center;"><%= @movie.title%> (<%= @movie.year %>)</h1>
+		
+
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-8">
 		<%= link_to 'Remove Movie From My Library', 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join), class: 'btn btn-primary right movie_button' %>
 		<%= link_to 'Add Movie To My Library', 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join), class: 'btn btn-primary right movie_button' %>
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-lg-4">
+		<img src=<%= @movie.poster %>, style="width: 100%; height: auto;"/>
+	</div>
 
+	<div class="col-lg-8">
+		<div class="row">
+			<div class="col-lg-5">
+				<h4>IMDB Rating: <%= @movie.imdb_rating %>/10</h4>
+				<h4>Tomato Rating: <%= @movie.tomato_rating %></h4>
+			</div>
+			<div class="col-lg-5">
+				<h4>Metascore: <%= @movie.metascore %>/100</h4>
+				<h4>Your Rating: </h4>
+			</div>
+		</div>
 
+		<div class="row">
+			<div class="col-lg-5">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	Rated: <%= @movie.rated %><br />
+	Released: <%= @movie.released.strftime("%B %d, %Y") %><br />
+	Runtime: <%= @movie.runtime %><br />
+	Genre: <%= @movie.genre %><br />
+	Directors: <%= @movie.director %><br />
+	Writers: <%= @movie.writer %><br />
+	Actors: <%= @movie.actors %><br />
+	Plot:	<%= @movie.plot %><br />
+	Awards: <%= @movie.awards %><br />
+	Website: <%= @movie.website %><br />
+	Production: <%= @movie.production %><br />
+</div>
 
 <br />
 <br />
