@@ -1,1 +1,28 @@
+<script type="text/javascript">
+	var movieId = '<%= @movie.id %>';
+	var addMovie = function() {
+		$.ajax({
+			type: "POST",
+			url: "<%= associate_user_movies_path %>",
+			data: { movie_id: movieId  }
+		}).done(function(msg) {
+			$('#add_movie_button').hide();
+			$('#remove_movie_button').show();
+		});
+	};
+	var removeMovie = function() {
+		$.ajax({
+			type: "POST",
+			url: "<%= disassociate_user_movies_path %>",
+			data: { movie_id: movieId  }
+		}).done(function(msg) {
+			$('#add_movie_button').show();
+			$('#remove_movie_button').hide();
+		});
+	};
+</script>
+
 <h1 style="float:left;"><%= @movie.title %></h1>
+
+<%= link_to 'Remove Movie From My Library', 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join) %>
+<%= link_to 'Add Movie To My Library', 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join) %>

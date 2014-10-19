@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :movies do
     collection do
       get :search
+      post :associate_user
+      post :disassociate_user
     end
   end
 

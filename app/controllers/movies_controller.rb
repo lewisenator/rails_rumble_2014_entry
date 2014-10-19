@@ -62,6 +62,18 @@ class MoviesController < ApplicationController
     puts "imdb_id: #{imdb_id}"
   end
 
+  def associate_user
+    movie_id = params[:movie_id]
+    UserMovieJoin.create!(user_id: current_user.id, movie_id: movie_id)
+    render json: {success: true}
+  end
+
+  def disassociate_user
+    movie_id = params[:movie_id]
+    UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).first.destroy
+    render json: {success: true}
+  end
+
   private
 
   def fetch_details(imdb_id)
