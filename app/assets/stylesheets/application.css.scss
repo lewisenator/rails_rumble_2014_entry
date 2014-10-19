@@ -10,6 +10,9 @@
 @import "skins/skin-1";
 @import "bxslider";
 @import "jquery.ui.all";
+.showcase-img {
+  border: 1px solid lightgrey;
+}
 @media (min-width: 1200px) {
   .product {
     max-height: 450px;
