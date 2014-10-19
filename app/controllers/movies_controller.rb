@@ -2,10 +2,12 @@ require 'omdb/network'
 require 'omdb/movie'
 
 class MoviesController < ApplicationController
+  PER_PAGE = 16
+
   before_action :authenticate_user!
 
   def index
-
+    @movies = current_user.movies.paginate(page: params[:page] || 1, per_page: PER_PAGE)
   end
 
   def search
@@ -13,21 +15,12 @@ class MoviesController < ApplicationController
     keywords = params[:keywords]
     results = Omdb::Api.new.search(keywords)
     results[:movies].select{|x| x.type == 'movie'}.each do |result|
-      # details = fetch_details(result.imdb_id)[:movie]
-      # puts "details: #{details}"
       movie = {
           title: result.title,
           year: result.year,
           imdb_id: result.imdb_id,
           url: movie_path(result.imdb_id)
       }
-
-      # [:rated, :released, :runtime, :genre, :director, :writer, :actors, :plot, :poster, :metascore, :language, :country, :awards].each do |key|
-      #   movie[key] = eval("details.#{key.to_s}").split(',').map{|x| x.strip} rescue ''
-      #   if movie[key].length == 1
-      #     movie[key] = movie[key][0]
-      #   end
-      # end
       movies.push(movie)
     end
     movies = movies.sort_by!{|x| x[:year].to_i}.reverse
@@ -45,6 +38,7 @@ class MoviesController < ApplicationController
       )
       @movie.save!
     end
+    @user_movie_join = UserMovieJoin.where(user_id: current_user.id, movie_id: @movie.id).first
     puts "imdb_id: #{imdb_id}"
   end
 

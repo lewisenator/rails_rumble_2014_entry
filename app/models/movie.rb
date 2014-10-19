@@ -30,4 +30,6 @@
 #
 
 class Movie < ActiveRecord::Base
+  has_many :user_movie_joins
+  has_many :users, through: :user_movie_joins
 end
