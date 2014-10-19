@@ -18,7 +18,7 @@
 			total = msg.results.length;
 			$(msg.results).each(function(index, item) {
 				var listItem = '';
-				listItem += '<li id="result_' + index + '">';
+				listItem += '<li id="result_' + index + '" class="result_item">';
 				listItem += '<a href=\'';
 				listItem += item.url;
 				listItem += '\'>';
@@ -48,10 +48,12 @@
 	};
 
 	var resetStuff = function() {
-		$('#search_results').hide();
-		$('#search_results_list').html('');
-		active = -1;
-		total = 0;
+		setTimeout(function(){
+			$('#search_results').hide();
+			$('#search_results_list').html('');
+			active = -1;
+			total = 0;
+		}, 500);
 	};
 
 	$(function() {
@@ -73,7 +75,9 @@
 		});
 
 		$("#keywords").on('blur', function() {
-			resetStuff();
+			setTimeout(function(){
+				resetStuff();
+			}, 1000);
 		});
 	});
 

@@ -233,3 +233,13 @@
   @extend .btn-primary:hover;
   background-color: #2aa300;
 }
+
+#footer {
+  .container {
+    padding-bottom: 50px;
+  }
+}
+
+body {
+  padding-bottom: 50px;
+}
