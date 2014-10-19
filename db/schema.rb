@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019051204) do
+ActiveRecord::Schema.define(version: 20141019083333) do
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -50,6 +50,10 @@ ActiveRecord::Schema.define(version: 20141019051204) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "movie_type"
+    t.string   "poster_image_file_name"
+    t.string   "poster_image_content_type"
+    t.integer  "poster_image_file_size"
+    t.datetime "poster_image_updated_at"
   end
 
   create_table "user_movie_joins", force: true do |t|

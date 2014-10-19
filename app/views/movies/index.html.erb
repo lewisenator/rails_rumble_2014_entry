@@ -63,7 +63,7 @@
 				<div class="product clearfix">
 					<div class="image">
 						<%= link_to movie_path(movie.imdb_id), class: 'main' do %>
-							<%= image_tag movie.poster, width: '300', height: '445' %>
+							<%= image_tag movie.poster_image.url(:medium), width: '300', height: '445' %>
 						<% end %>
 					</div>
 					<div class="title">

@@ -32,4 +32,12 @@
 class Movie < ActiveRecord::Base
   has_many :user_movie_joins
   has_many :users, through: :user_movie_joins
+
+  has_attached_file :poster_image, styles: {
+      thumb: '100x100>',
+      medium: '300x300>',
+      large: '600x600>'
+  }
+
+  validates_attachment_content_type :poster_image, content_type: /\Aimage\/.*\Z/
 end

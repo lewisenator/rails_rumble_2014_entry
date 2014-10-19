@@ -1,5 +1,7 @@
 require 'omdb/network'
 require 'omdb/movie'
+require 'net/http'
+require "uri"
 
 class MoviesController < ApplicationController
   PER_PAGE = 12
@@ -56,6 +58,7 @@ class MoviesController < ApplicationController
           production: details.production,
           website: details.website
       )
+      @movie.poster_image = URI(@movie.poster)
       @movie.save!
     end
     @user_movie_join = UserMovieJoin.where(user_id: current_user.id, movie_id: @movie.id).first
