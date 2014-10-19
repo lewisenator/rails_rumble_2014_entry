@@ -10,17 +10,74 @@
 @import "skins/skin-1";
 @import "bxslider";
 @import "jquery.ui.all";
-
+@media (min-width: 1200px) {
+  .product {
+    max-height: 450px;
+    .image {
+      a.main {
+        img {
+          height: 350px;
+          width: auto;
+          repeat-x: none;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 992px) {
+  .product {
+    max-height: 380px;
+    .image {
+      a.main {
+        img {
+          height: 280px;
+          width: auto;
+          repeat-x: none;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .product {
+    max-height: 400px;
+    height: 400px;
+    .image {
+      a.main {
+        img {
+          height: 280px;
+          width: auto;
+          repeat-x: none;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .product {
+    max-height: 400px;
+    height: 400px;
+    .image {
+      a.main {
+        img {
+          max-height: 300px;
+          width: auto;
+          repeat-x: none;
+        }
+      }
+    }
+  }
+}
 .product-grid {
   li {
     .product {
+
       .image {
         a {
+
           img {
             background-color: #CCC;
             padding: 10px;
-            width: 100%;
-            height: 100%;
           }
           img:hover {
             background-color: #BBB;
@@ -55,11 +112,11 @@
 #my_movies_list {
   ul {
     li {
-      height: 500px;
+//      height: 500px;
       .product {
-        height: 450px;
+//        height: 450px;
         .image {
-          height: 350px;
+//          height: 350px;
         }
         .title {
           text-align: center;
@@ -125,3 +182,51 @@
   height: 1%; }
 *:first-child + html .digg_pagination {
   overflow: hidden; }
+
+
+#search_results {
+  position: relative;
+  height:0;
+  z-index:1000;
+  #search_results_list {
+    border: 1px solid darkgray;
+    list-style:none;
+    background-color: white;
+    padding-left: 0;
+    li {
+      background-color: white;
+      border-top: 1px solid #e8e8e8;
+      padding: 4px 12px;
+    }
+    li:first-child {
+      border-top: none;
+    }
+    li.active {
+      background-color: #c2c5d4;
+    }
+  }
+}
+
+.movie_info_label {
+  font-size: 100%;
+  font-family: 'Open Sans Web', Arial, sans-serif;
+}
+
+.movie_info_data {
+  font-size: 80%;
+  font-family: 'Open Sans Web', Arial, sans-serif;
+}
+
+.movie_field {
+  margin: 20.8px 0 10.8px 0;
+}
+
+.btn-primary-green {
+  @extend .btn-primary;
+  background-color: #29bc00;
+}
+
+.btn-primary-green:hover {
+  @extend .btn-primary:hover;
+  background-color: #2aa300;
+}

@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
           title: result.title,
           year: result.year,
           imdb_id: result.imdb_id,
-          url: movie_path(result.imdb_id)
+          url: movie_url(result.imdb_id)
       }
       movies.push(movie)
     end
@@ -58,7 +58,7 @@ class MoviesController < ApplicationController
           production: details.production,
           website: details.website
       )
-      @movie.poster_image = URI(@movie.poster)
+      @movie.poster_image = URI(@movie.poster) unless @movie.poster == 'N/A'
       @movie.save!
     end
     @user_movie_join = UserMovieJoin.where(user_id: current_user.id, movie_id: @movie.id).first
@@ -67,13 +67,16 @@ class MoviesController < ApplicationController
 
   def associate_user
     movie_id = params[:movie_id]
-    UserMovieJoin.create!(user_id: current_user.id, movie_id: movie_id)
+    existing = UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).first
+    unless existing
+      UserMovieJoin.create!(user_id: current_user.id, movie_id: movie_id)
+    end
     render json: {success: true}
   end
 
   def disassociate_user
     movie_id = params[:movie_id]
-    UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).first.destroy
+    UserMovieJoin.where(user_id: current_user.id, movie_id: movie_id).each{|x| x.destroy}
     render json: {success: true}
   end
 

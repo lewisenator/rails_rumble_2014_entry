@@ -1,4 +1,7 @@
 <script type="text/javascript">
+	var active = -1;
+	var total = 0;
+
 	var showAddPopup = function() {
 		$("#add_popup").dialog();
 	};
@@ -10,10 +13,12 @@
 			url: "<%= search_movies_path %>",
 			data: { keywords: keywords }
 		}).done(function(msg) {
-			$('#search_results').html('');
+			$('#search_results_list').html('');
+			$('#search_results').show();
+			total = msg.results.length;
 			$(msg.results).each(function(index, item) {
 				var listItem = '';
-				listItem += '<li>';
+				listItem += '<li id="result_' + index + '">';
 				listItem += '<a href=\'';
 				listItem += item.url;
 				listItem += '\'>';
@@ -21,32 +26,77 @@
 				listItem += ' (' + item.year + ')';
 				listItem += '</a>';
 				listItem += '</li>';
-				$('#search_results').html($('#search_results').html() + listItem);
-				console.log('title: ' + item.title + ' year: ' + item.year + ' poster: ' + item.poster);
+				$('#search_results_list').html($('#search_results_list').html() + listItem);
 			});
 		});
 	};
+
+	var highlight = function(index) {
+		if (index < 0) index = 0;
+		if (index > total - 1) index = total - 1;
+		var previous = $('#result_' + active);
+		var result = $('#result_' + index);
+		previous.removeClass('active');
+		result.addClass('active');
+		active = index;
+	};
+
+	var visitMovie = function(index) {
+		var movie = $('#result_' + index);
+		top.location.href = $(movie.children()[0]).attr('href');
+		resetStuff();
+	};
+
+	var resetStuff = function() {
+		$('#search_results').hide();
+		$('#search_results_list').html('');
+		active = -1;
+		total = 0;
+	};
+
+	$(function() {
+		$("#keywords").keydown(function(event) {
+			if ( event.which == 13 ) {
+				event.preventDefault();
+				if (active > -1 && active < total) {
+					visitMovie(active);
+				} else {
+					performSearch();
+				}
+			} else if (event.keyCode == 40) { //down
+				event.preventDefault();
+				highlight(active + 1);
+			} else if (event.keyCode == 38) { //up
+				event.preventDefault();
+				highlight(active - 1);
+			}
+		});
+
+		$("#keywords").on('blur', function() {
+			resetStuff();
+		});
+	});
 
 </script>
 
 
 <div class="row">
 
-	<div class="col-lg-6">
-		<h1 style="float:left;">Movies</h1>
+	<div class="col-lg-6 col-sm-12 col-xs-12">
+		<h1 style="float:left;">My Movies</h1>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-6 col-sm-12 col-xs-12">
 		<form>
 			<div id="add_popup" title="Add a Movie" style="margin-top: 25px;">
 				<div class="input-group">
-					<input id="keywords" type="text" placeholder="keywords" class="string optional input-medium search-query form-control" />
+					<input id="keywords" type="text" placeholder="Movie Title" class="string optional input-medium search-query form-control" autocomplete="off"/>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onclick="performSearch();"><i class="glyphicon glyphicon-search"></i></button>
 					</span>
 				</div>
-				<ul id="search_results" style="list-style:none;">
-
-				</ul>
+				<div id="search_results" style="display:none;">
+					<ul id="search_results_list"></ul>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -59,12 +109,14 @@
 
 	<ul class="product-grid row">
 		<% @movies.each do |movie| %>
-			<li class="col-xs-6 col-sm-3 col-md-3">
-				<div class="product clearfix">
+			<li class="col-xs-12 col-sm-4 col-md-3">
+				<div class="product clearfix" style="height: 100%;">
 					<div class="image">
-						<%= link_to movie_path(movie.imdb_id), class: 'main' do %>
-							<%= image_tag movie.poster_image.url(:medium), width: '300', height: '445' %>
-						<% end %>
+						<center>
+							<%= link_to movie_path(movie.imdb_id), class: 'main' do %>
+								<%= image_tag movie.poster_image.url(:medium)%>
+							<% end %>
+						</center>
 					</div>
 					<div class="title">
 						<%= link_to movie.title, movie_path(movie.imdb_id) %>

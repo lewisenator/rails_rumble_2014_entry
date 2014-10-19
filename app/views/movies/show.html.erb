@@ -22,62 +22,84 @@
 	};
 </script>
 
-
-<div class="row">
-
-	<div class="col-lg-4">
-		<h1 style="text-align: center;"><%= @movie.title%> (<%= @movie.year %>)</h1>
-		
-
-	</div>
-	<div class="col-lg-8">
-		<%= link_to 'Remove Movie From My Library', 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join), class: 'btn btn-primary right movie_button' %>
-		<%= link_to 'Add Movie To My Library', 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join), class: 'btn btn-primary right movie_button' %>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-lg-4">
+<div class="row" style="margin-top: 15px;">
+	<div class="col-lg-4" style="margin-top: 20px;">
 		<img src=<%= @movie.poster_image.url(:large) %>, style="width: 100%; height: auto;"/>
+		<center>
+			<%= link_to 'javascript:removeMovie();', id: 'remove_movie_button', style: ('display:none;' unless @user_movie_join), class: 'btn btn-primary movie_button' do %>
+				<i class="fa fa-times"></i> Remove Movie From My Library
+			<% end %>
+			<%= link_to 'javascript:addMovie();', id: 'add_movie_button', style: ('display:none;' if @user_movie_join), class: 'btn btn-primary-green movie_button' do %>
+				<i class="fa fa-plus"></i> Add Movie To My Library
+			<% end %>
+		</center>
 	</div>
 
 	<div class="col-lg-8">
-		<div class="row">
-			<div class="col-lg-5">
-				<h4>IMDB Rating: <%= @movie.imdb_rating %>/10</h4>
-				<h4>Tomato Rating: <%= @movie.tomato_rating %></h4>
-			</div>
-			<div class="col-lg-5">
-				<h4>Metascore: <%= @movie.metascore %>/100</h4>
-				<h4>Your Rating: </h4>
-			</div>
-		</div>
+		<h1><%= @movie.title%> (<%= @movie.year %>)</h1>
 
-		<div class="row">
-			<div class="col-lg-5">
+		<% [
 
+				 [{display: 'Director', value: @movie.director},
+					{display: 'Runtime', value: @movie.runtime}],
+
+				[{display: 'IMDB Rating', value: "#{@movie.imdb_rating} / 10"},
+				 {display: 'Tomato Rating', value: "#{@movie.tomato_rating}#{' / 10' if @movie.tomato_rating != 'N/A'}"}],
+
+				[{display: 'Metascore', value: "#{@movie.metascore} / 100"},
+				 {display: 'Your Rating', value: "N/A"}],
+
+				[{display: 'Rated', value: @movie.rated},
+				 {display: 'Released', value: @movie.released.strftime("%B %d, %Y")}],
+
+				[{display: 'Production', value: @movie.production},
+				 {display: 'Genre', value: @movie.genre}],
+
+				[{display: 'Website', value: "#{link_to @movie.website, @movie.website}"}],
+				[{display: 'Writers', value: @movie.writer}],
+				[{display: 'Actors', value: @movie.actors}],
+				[{display: 'Awards', value: @movie.awards}],
+
+			 ].each do |row| %>
+			<div class="row">
+				<% if row.length == 1 %>
+					<% column = row[0] %>
+					<div class="col-lg-12">
+						<h4 class="movie_field">
+							<b class="movie_info_label"><%= (column[:display] || '').html_safe %></b>:
+							<span class="movie_info_data">
+								<%= (column[:value] || '').html_safe %>
+							</span>
+						</h4>
+					</div>
+				<% else %>
+					<% row.each do |column| %>
+							<div class="col-lg-5">
+								<h4 class="movie_field">
+									<b class="movie_info_label"><%= (column[:display] || '').html_safe %></b>:
+									<span class="movie_info_data">
+										<%= (column[:value] || '').html_safe %>
+									</span>
+								</h4>
+							</div>
+					<% end %>
+				<% end %>
 			</div>
-		</div>
+		<% end %>
+
 	</div>
 </div>
 
 <div class="row">
-	Rated: <%= @movie.rated %><br />
-	Released: <%= @movie.released.strftime("%B %d, %Y") %><br />
-	Runtime: <%= @movie.runtime %><br />
-	Genre: <%= @movie.genre %><br />
-	Directors: <%= @movie.director %><br />
-	Writers: <%= @movie.writer %><br />
-	Actors: <%= @movie.actors %><br />
-	Plot:	<%= @movie.plot %><br />
-	Awards: <%= @movie.awards %><br />
-	Website: <%= @movie.website %><br />
-	Production: <%= @movie.production %><br />
+	<div class="col-lg-12">
+		<h4 class="movie_field">
+			<span class="movie_info_data">
+				<%= @movie.plot %>
+			</span>
+		</h4>
+	</div>
 </div>
 
 <br />
-<br />
-<br />
-<br />
-<br />
-<%= link_to 'Back to My Movies', movies_path, class: 'btn btn-primary' %>
+
+<%= link_to 'Back to My Movies', movies_path, class: 'btn btn-default' %>
