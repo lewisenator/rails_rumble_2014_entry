@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
   private
 
   def fetch_details(imdb_id)
-    res = network.call({i: imdb_id, tomatoes: true})
+    res = network.call({i: imdb_id, tomatoes: true, plot: "full"})
     if res[:data]["Response"] == "False"
       response = {:status => 404}
     else
