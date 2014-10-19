@@ -13,7 +13,8 @@ class MoviesController < ApplicationController
     keywords = params[:keywords]
     results = Omdb::Api.new.search(keywords)
     results[:movies].select{|x| x.type == 'movie'}.each do |result|
-      # details = fetch_details(result.imdb_id)[:movie]
+      details = fetch_details(result.imdb_id)[:movie]
+      puts "details: #{details}"
       movie = {
           title: result.title,
           year: result.year,
