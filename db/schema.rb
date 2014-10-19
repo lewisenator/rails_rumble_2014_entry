@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018072846) do
+ActiveRecord::Schema.define(version: 20141019043638) do
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
@@ -24,6 +24,33 @@ ActiveRecord::Schema.define(version: 20141018072846) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "movies", force: true do |t|
+    t.string   "title"
+    t.integer  "year"
+    t.string   "imdb_id"
+    t.string   "type"
+    t.string   "rated"
+    t.date     "released"
+    t.string   "runtime"
+    t.text     "genre"
+    t.text     "director"
+    t.text     "writer"
+    t.text     "actors"
+    t.text     "plot"
+    t.string   "poster"
+    t.string   "imdb_rating"
+    t.integer  "imdb_votes"
+    t.integer  "metascore"
+    t.string   "language"
+    t.string   "country"
+    t.text     "awards"
+    t.string   "tomato_rating"
+    t.string   "production"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

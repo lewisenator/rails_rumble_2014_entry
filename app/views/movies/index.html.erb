@@ -14,8 +14,12 @@
 			$(msg.results).each(function(index, item) {
 				var listItem = '';
 				listItem += '<li>';
+				listItem += '<a href=\'';
+				listItem += item.url;
+				listItem += '\'>';
 				listItem += item.title;
 				listItem += ' (' + item.year + ')';
+				listItem += '</a>';
 				listItem += '</li>';
 				$('#search_results').html($('#search_results').html() + listItem);
 				console.log('title: ' + item.title + ' year: ' + item.year + ' poster: ' + item.poster);
@@ -26,18 +30,30 @@
 </script>
 
 
+<div class="row">
 
-<h1>Movies<%= link_to "Add", 'javascript:showAddPopup();', class: "btn btn-primary right" %></h1>
+	<div class="col-lg-6">
+		<h1 style="float:left;">Movies</h1>
+	</div>
+	<div class="col-lg-6">
+		<form>
+			<div id="add_popup" title="Add a Movie" style="margin-top: 25px;">
+				<div class="input-group">
+					<input id="keywords" type="text" placeholder="keywords" class="string optional input-medium search-query form-control" />
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" onclick="performSearch();"><i class="glyphicon glyphicon-search"></i></button>
+					</span>
+				</div>
+				<ul id="search_results" style="list-style:none;">
 
-<div id="add_popup" title="Add a Movie">
-	<form>
-		<input id="keywords" type="text" placeholder="Keyword(s)" />
-		<%= link_to "Search", 'javascript:performSearch();', class: "btn btn-primary" %>
-	</form>
-	<ul id="search_results" style="list-style:none;">
+				</ul>
+			</div>
+		</form>
+	</div>
 
-	</ul>
 </div>
+
+
 
 <div id="my_movies_list">
 

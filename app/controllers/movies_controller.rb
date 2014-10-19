@@ -13,12 +13,13 @@ class MoviesController < ApplicationController
     keywords = params[:keywords]
     results = Omdb::Api.new.search(keywords)
     results[:movies].select{|x| x.type == 'movie'}.each do |result|
-      details = fetch_details(result.imdb_id)[:movie]
-      puts "details: #{details}"
+      # details = fetch_details(result.imdb_id)[:movie]
+      # puts "details: #{details}"
       movie = {
           title: result.title,
           year: result.year,
-          imdb_id: result.imdb_id
+          imdb_id: result.imdb_id,
+          url: movie_path(result.imdb_id)
       }
 
       # [:rated, :released, :runtime, :genre, :director, :writer, :actors, :plot, :poster, :metascore, :language, :country, :awards].each do |key|
@@ -29,10 +30,22 @@ class MoviesController < ApplicationController
       # end
       movies.push(movie)
     end
-
-
     movies = movies.sort_by!{|x| x[:year].to_i}.reverse
     render json: {results: movies, keywords: keywords}
+  end
+
+  def show
+    imdb_id = params[:id]
+    @movie = Movie.find_by_imdb_id(imdb_id)
+    unless @movie
+      details = fetch_details(imdb_id)[:movie]
+      @movie = Movie.new(
+          title: details.title,
+          imdb_id: details.imdb_id
+      )
+      @movie.save!
+    end
+    puts "imdb_id: #{imdb_id}"
   end
 
   private
